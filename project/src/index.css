@@ -2,44 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
+@layer base {
+  body {
+    background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  }
 }
 
-body {
-  @apply bg-gradient-to-br from-gray-900 to-black text-white;
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-}
+@layer utilities {
+  .glass-card {
+    @apply relative overflow-hidden;
+  }
 
-.glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--glass-border);
-  border-radius: 1rem;
-}
+  .glass-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-xl;
+  }
 
-/* Dark mode styles */
-.dark {
-  --glass-bg: rgba(0, 0, 0, 0.3);
-  --glass-border: rgba(255, 255, 255, 0.1);
-}
-
-/* Light mode styles */
-.light {
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.3);
-}
-
-.input {
-  @apply w-full p-2 rounded bg-opacity-20 bg-white backdrop-blur-lg;
-}
-
-.btn {
-  @apply px-4 py-2 rounded transition-colors;
-}
-
-.btn-primary {
-  @apply bg-purple-600 text-white hover:bg-purple-700;
+  .glass-card::after {
+    content: '';
+    @apply absolute inset-0 backdrop-blur-xl bg-white/10 rounded-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.37)];
+  }
 }
